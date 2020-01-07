@@ -1,0 +1,6 @@
+select * from dbo.账务明细全 
+where 客户编号金蝶 like '%${客户编号}%' and 
+摘要 like '%${摘要}%' and 
+类型 like '%${类型}%' and
+期间 like '%${期间}%'
+${if(len(金额)==0,""," and 调整后贷方本币 = " + 金额)}
