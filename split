@@ -1,6 +1,5 @@
-数据库版本不同不兼容
 sqlserver 改数据库属性  选项  兼容性级别
-string_split适用2017版本
+string_split适用2017版本，否则会报对象不存在
 
 ${if(len(退货单号)==0,
 "select * from [退货].dbo.[退货数据汇总]
