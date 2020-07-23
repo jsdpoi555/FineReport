@@ -19,8 +19,3 @@ select * from dbo.账务余额全
 where 客户编号金蝶 like '%${客户编号}%'
 
 
-select * from
-(select value as 客户编号 from string_split('${客户编号}',',')) as A
-inner JOIN
-(select * from dbo.账务余额全) AS B
-ON A.客户编号 = B.客户编号金蝶
