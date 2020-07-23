@@ -21,4 +21,29 @@ ON A.退货单号 = B.退货单号")}
 select * from dbo.账务余额全
 where 客户编号金蝶 like '%${客户编号}%'
 
+select * from
+(SELECT distinct value as 会员号 FROM string_split('${客户编号}' ,',')) as A
+INNER JOIN
+(SELECT * FROM dbo.账务余额全) as B
+ON A.会员号 = B.客户编号金蝶
 
+
+select * from
+(SELECT distinct value as 会员号 FROM string_split('${客户编号}' ,',')) as A
+INNER JOIN
+(select * from dbo.账务明细全 
+where 摘要 like '%${摘要}%' and 
+类型 like '%${类型}%' and
+客户名称 like '%${客户名称}%' and
+期间 like '%${期间}%'
+${if(len(金额)==0,""," and 调整后贷方本币 = " + 金额)}) as B
+ON A.会员号 = B.客户编号金蝶
+
+
+select * from dbo.账务明细全 
+where 客户编号金蝶 like '%${客户编号}%' and 
+摘要 like '%${摘要}%' and 
+类型 like '%${类型}%' and
+客户名称 like '%${客户名称}%' and
+期间 like '%${期间}%'
+${if(len(金额)==0,""," and 调整后贷方本币 = " + 金额)}
