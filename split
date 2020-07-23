@@ -1,0 +1,9 @@
+select * from
+(select value as 退货单号 from string_split('${退货单号}',',')) as A
+inner JOIN
+(select * from [退货].dbo.[退货数据汇总]
+where 会员编号 like '%${客户编号}%' and 
+退货状态 = '已入库' and 
+入库单状态 = '已入库' and 
+需退货的出库单号 like '%${出库单号}%') AS B
+ON A.退货单号 = B.退货单号
