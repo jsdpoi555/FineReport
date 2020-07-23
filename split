@@ -6,7 +6,7 @@ where 会员编号 like '%" + 客户编号 +"%' and
 需退货的出库单号 like '%" + 出库单号 + "%' and
 退货单号 like '%" + 退货单号 + "%'",
 "select * from
-(select value as 退货单号 from string_split('" + 退货单号 + "',',')) as A
+(select distinct value as 退货单号 from string_split('" + 退货单号 + "',',')) as A
 inner JOIN
 (select * from [退货].dbo.[退货数据汇总]
 where 会员编号 like '%" + 客户编号 + "%' and 
@@ -14,7 +14,6 @@ where 会员编号 like '%" + 客户编号 + "%' and
 入库单状态 = '已入库' and 
 需退货的出库单号 like '%" + 出库单号 + "%') AS B
 ON A.退货单号 = B.退货单号")}
-
 
 select * from dbo.账务余额全
 where 客户编号金蝶 like '%${客户编号}%'
