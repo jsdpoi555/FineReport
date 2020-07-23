@@ -15,3 +15,6 @@ where 会员编号 like '%" + 客户编号 + "%' and
 需退货的出库单号 like '%" + 出库单号 + "%') AS B
 ON A.退货单号 = B.退货单号")}
 
+
+select * from dbo.账务余额全
+where 客户编号金蝶 like '%${客户编号}%'
